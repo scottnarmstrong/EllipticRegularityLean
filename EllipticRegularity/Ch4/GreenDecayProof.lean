@@ -1,0 +1,45 @@
+module
+
+public import EllipticRegularity.Ch4.GreenDecay.DecayFull
+public import PDEFoundation
+public import EllipticRegularity.Green.GreenFunctionDef
+
+/-!
+# Proof of `PDE.greenDecay` (Lemma 4.35)
+
+-/
+
+@[expose] public section
+
+namespace PDE.GreenDecayProof
+
+open MeasureTheory
+
+theorem result (d : ℕ) (hd : 2 ≤ d) :
+    ∃ C : ℝ, 0 < C ∧ ∀ (Λ R : ℝ), 10 ≤ R → ∀ a : CoeffField d,
+      (∀ i j : Fin d, AEMeasurable (fun x => a x i j) (volumeOn (euclideanBall (0 : Vec d) R))) →
+      (∀ x ∈ euclideanBall (0 : Vec d) R, IsEllipticMatrix 1 Λ (a x)) →
+      ∀ (β Cs : ℝ), 0 < β → β ≤ 1 → 0 ≤ Cs →
+      (∀ ρ : ℝ, 4 ≤ ρ → ρ ≤ R → ∀ w : H1Function (euclideanBall (0 : Vec d) ρ),
+        IsWeakDivergenceFormSolutionOn (adjointCoeffField a) (euclideanBall (0 : Vec d) ρ) w
+          (0 : Vec d → ℝ) (0 : Vec d → Vec d) →
+        ∃ m : ℝ, ∀ᵐ x ∂(volumeOn (euclideanBall (0 : Vec d) 2)),
+          m ≤ w.toFun x ∧
+          ENNReal.ofReal (w.toFun x - m) ≤
+            ENNReal.ofReal (Cs * ρ ^ (-β)) *
+              eLpMeanNormOn (euclideanBall (0 : Vec d) ρ) 2
+                (fun y => w.toFun y - integralAverage (euclideanBall (0 : Vec d) ρ) w.toFun)) →
+      ∀ f : Vec d → Vec d, MemVectorL2On (euclideanBall (0 : Vec d) 1) f →
+      ∀ u : H10Function (euclideanBall (0 : Vec d) R),
+      IsWeakDivergenceFormH10SolutionOn a (euclideanBall (0 : Vec d) R) u.toH1Function
+        (0 : Vec d → ℝ) ((euclideanBall (0 : Vec d) 1).indicator f) →
+      ∀ r : ℝ, 10 ≤ r → r ≤ R →
+        eLpMeanNormOn (euclideanBall (0 : Vec d) r \ euclideanBall (0 : Vec d) (r / 2)) 2
+            (fun x => u.toH1Function.toFun x -
+              integralAverage (euclideanBall (0 : Vec d) r \ euclideanBall (0 : Vec d) (r / 2))
+                u.toH1Function.toFun) ≤
+          ENNReal.ofReal (C * Cs * Real.sqrt Λ * r ^ (2 - β - (d : ℝ))) *
+            eLpNorm (fun x => vecEuclideanNorm (f x)) 2 (volumeOn (euclideanBall (0 : Vec d) 1)) :=
+  PDE.Ch4GreenDecay.greenDecay_full  d hd
+
+end PDE.GreenDecayProof

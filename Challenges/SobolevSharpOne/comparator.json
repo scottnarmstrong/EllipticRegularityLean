@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.SobolevSharpOne.Challenge",
+  "solution_module": "Challenges.SobolevSharpOne.Solution",
+  "theorem_names": ["PDE.sobolev_inequality_sharp_p_one"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

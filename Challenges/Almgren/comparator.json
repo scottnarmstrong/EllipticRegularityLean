@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.Almgren.Challenge",
+  "solution_module": "Challenges.Almgren.Solution",
+  "theorem_names": ["PDE.almgren_monotonicity"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

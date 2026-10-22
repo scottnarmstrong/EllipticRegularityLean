@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.Campanato.Challenge",
+  "solution_module": "Challenges.Campanato.Solution",
+  "theorem_names": ["PDE.exists_campanato_characterization_constant"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

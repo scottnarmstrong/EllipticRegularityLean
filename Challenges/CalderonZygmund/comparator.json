@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.CalderonZygmund.Challenge",
+  "solution_module": "Challenges.CalderonZygmund.Solution",
+  "theorem_names": ["PDE.exists_calderonZygmund"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

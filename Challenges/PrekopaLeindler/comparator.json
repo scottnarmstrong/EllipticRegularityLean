@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.PrekopaLeindler.Challenge",
+  "solution_module": "Challenges.PrekopaLeindler.Solution",
+  "theorem_names": ["PDE.prekopa_leindler"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

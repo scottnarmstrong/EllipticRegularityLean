@@ -1,0 +1,116 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Elliptic Regularity: a Lean 4 formalization of the regularity theory of divergence-form equations"
+  description: >-
+    A Lean 4 formalization of regularity theory for divergence-form
+    equations: scalar, second-order, uniformly elliptic and parabolic
+    equations with measurable coefficients.  It covers the isoperimetric,
+    Sobolev, Poincaré, John–Nirenberg, Trudinger, Nash and trace
+    inequalities; Almgren and Alt–Caffarelli–Friedman monotonicity; Schauder
+    and Calderón–Zygmund estimates and Yudovich uniqueness for the 2d Euler
+    equations; the Meyers estimate and Gehring lemma; the De Giorgi–Nash–Moser
+    Hölder estimate and the Harnack inequality, with sharpness examples;
+    two-sided Green function estimates; and the Nash–Aronson estimates for
+    parabolic equations.  Each main result is stated in an accompanying
+    manuscript.
+  authors:
+    - "Scott Armstrong"
+    - "Tuomo Kuusi"
+    - "Amélie Loher"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Scott Armstrong"
+    - "Tuomo Kuusi"
+    - "Amélie Loher"
+
+classification:
+  arxiv: ["math.AP"]
+  msc2020: ["35J15", "35B65", "35K10"]
+
+sources:
+  - title: "Elliptic Regularity"
+    authors:
+      - "Scott Armstrong"
+      - "Tuomo Kuusi"
+      - "Amélie Loher"
+    type: "paper"
+    location: "arXiv identifier to be added on posting; manuscript/ellipticregularity.pdf in this repository"
+    relationship: "formalizes"
+    license: "all rights reserved"
+    author_endorsement: "participated"
+
+status:
+  scope: >-
+    The libraries PDEFoundation and EllipticRegularity prove the theorems,
+    propositions, lemmas, corollaries and examples of the manuscript that
+    RESULTS.md lists, and the statement libraries (*Statements/) give the main
+    results one per file in the manuscript's form.  Eighteen of them are also
+    stated Mathlib-only in Challenges/ and checked against their proofs by the
+    Lean comparator.  Remarks and exercises of the manuscript are not
+    formalized.  The isoperimetric inequality is formalized without the
+    equality case, which the manuscript does not prove.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models:
+        - "claude-opus-5-5"
+        - "claude-opus-5"
+        - "claude-sonnet-5-5"
+      framework: >-
+        Claude Code (Anthropic) agentic coding harness.  The formalization was
+        produced with AI assistance under the authors' direction: AI agents
+        wrote the Lean proofs and the supporting infrastructure, and the
+        statements of the main results were fixed by the authors and approved
+        by them before any proof was attempted.
+      tool_setup: >-
+        Lake builds under leanprover/lean4:v4.35.0-rc2 with Mathlib
+        v4.35.0-rc2.  A manifest of statement content hashes bound the
+        approved statement surface during development.  Read-only agents were
+        used for statement checks and for independent pre-release reviews.
+      prompting_notes: >-
+        Human-directed agent work; the authors approved every statement of a
+        main result.
+    - method: "agent"
+      models:
+        - "gpt-6-luna"
+        - "gpt-6-sol"
+        - "gpt-5.6-sol"
+      framework: >-
+        OpenAI Codex CLI agents, which wrote Lean proofs in parts of the
+        development (among them the harmonic-function and Schauder
+        estimates), under the same statement-approval process.
+  notes: >-
+    All Lean code in this repository was written by AI agents (Claude and
+    OpenAI Codex) under
+    the direction of the authors, who approved the statements of the main
+    results.  Every proof is checked by the Lean kernel and Mathlib; the
+    libraries contain no sorry and no custom axiom.  The Mathlib-only
+    comparator challenge files (Challenges/*/Challenge.lean) each contain
+    exactly one intentional statement-level sorry, which the corresponding
+    Solution.lean fills from the libraries.
+
+review:
+  status: "author-verified"
+  reviewers:
+    - "Scott Armstrong"
+    - "Tuomo Kuusi"
+    - "Amélie Loher"
+  notes: >-
+    The authors approved the statements of the main results.  The statements
+    and the release tree were additionally reviewed independently by a
+    separate AI model (a statement-fidelity review and a registry-intake
+    review).  Correctness of every proof is guaranteed by the Lean kernel and
+    Mathlib.  This is not external peer review.
+
+acknowledgements: >-
+  Scott Armstrong and Tuomo Kuusi were supported by the European Research
+  Council (ERC) under the European Union's Horizon Europe research and
+  innovation programme, grant agreement No. 101200828.  Amélie Loher
+  acknowledges support from the Fondation Sciences Mathématiques de Paris.
+  Built on Lean 4, Mathlib, Lake, and leanprover/comparator.

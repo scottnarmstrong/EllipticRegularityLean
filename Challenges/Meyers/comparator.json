@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.Meyers.Challenge",
+  "solution_module": "Challenges.Meyers.Solution",
+  "theorem_names": ["PDE.exists_meyers_constants"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

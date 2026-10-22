@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.DeGiorgiHolder.Challenge",
+  "solution_module": "Challenges.DeGiorgiHolder.Solution",
+  "theorem_names": ["PDE.exists_deGiorgi_holder_constant"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.ParabolicHarnack.Challenge",
+  "solution_module": "Challenges.ParabolicHarnack.Solution",
+  "theorem_names": ["PDE.parabLocalHarnack"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

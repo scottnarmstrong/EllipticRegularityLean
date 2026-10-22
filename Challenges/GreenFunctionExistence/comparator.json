@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.GreenFunctionExistence.Challenge",
+  "solution_module": "Challenges.GreenFunctionExistence.Solution",
+  "theorem_names": ["PDE.greenExists"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

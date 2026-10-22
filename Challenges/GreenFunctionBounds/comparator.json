@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.GreenFunctionBounds.Challenge",
+  "solution_module": "Challenges.GreenFunctionBounds.Solution",
+  "theorem_names": ["PDE.greenD3"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

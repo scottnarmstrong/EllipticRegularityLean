@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.Isoperimetric.Challenge",
+  "solution_module": "Challenges.Isoperimetric.Solution",
+  "theorem_names": ["PDE.isoperimetric_inequality"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

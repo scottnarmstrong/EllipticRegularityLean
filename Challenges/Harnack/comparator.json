@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.Harnack.Challenge",
+  "solution_module": "Challenges.Harnack.Solution",
+  "theorem_names": ["PDE.exists_harnack_constant"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

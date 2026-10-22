@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.Trace.Challenge",
+  "solution_module": "Challenges.Trace.Solution",
+  "theorem_names": ["PDE.trace_inequality"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

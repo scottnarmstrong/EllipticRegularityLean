@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.NewtonWeakType.Challenge",
+  "solution_module": "Challenges.NewtonWeakType.Solution",
+  "theorem_names": ["PDE.exists_newtonPotential_weakTypeOne"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

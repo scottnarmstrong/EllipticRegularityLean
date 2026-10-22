@@ -1,0 +1,105 @@
+name: CI
+
+# Manual dispatch only.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Cancel superseded runs on the same ref.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: lake build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      # The hosted runner has limited disk; the Mathlib cache plus a full build of this
+      # repository needs about 12 GB. Remove preinstalled toolchains that are not used.
+      - name: Free disk space
+        shell: bash
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL \
+            /usr/local/share/boost /usr/local/share/powershell /usr/share/swift
+          sudo docker image prune --all --force > /dev/null 2>&1 || true
+          df -h /
+
+      - name: Set up Lean and Mathlib cache
+        uses: leanprover/lean-action@v1
+        with:
+          build: false
+          use-mathlib-cache: true
+
+      # Restore/save are split so the save runs even when a later step fails: a failed or
+      # interrupted build still keeps its completed modules for the next run.
+      - name: Restore project build artifacts
+        id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.sha }}
+          restore-keys: |
+            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-
+
+      - name: Warning-free build
+        shell: bash
+        run: |
+          set -o pipefail
+          lake build 2>&1 | tee build.log
+          if grep -iE '^warning:|declaration uses .sorry' build.log; then exit 1; fi
+      - name: Hygiene (no sorry, heartbeat override, custom axiom; 1500-line cap)
+        shell: bash
+        run: |
+          status=0
+          while IFS= read -r f; do
+            [ "$(wc -l < "$f")" -gt 1500 ] && { echo "::error file=$f::over 1500 lines"; status=1; }
+          done < <(git ls-files '*.lean')
+          # Code-level `sorry` outside Challenges/ (comments and strings are ignored; the
+          # Challenges/*/Challenge.lean files contain intentional holes).
+          python3 - <<'PY' || status=1
+          import re, subprocess, sys
+          files = subprocess.check_output(['git', 'ls-files', '*.lean'], text=True).split()
+          bad = 0
+          for f in files:
+              if f.startswith('Challenges/'):
+                  continue
+              s = open(f, encoding='utf-8').read()
+              # strip nested block comments (including docstrings), line comments and string literals
+              out, i, depth = [], 0, 0
+              while i < len(s):
+                  if s.startswith('/-', i):
+                      depth += 1; i += 2
+                  elif depth and s.startswith('-/', i):
+                      depth -= 1; i += 2
+                  elif depth:
+                      out.append('\n' if s[i] == '\n' else ' '); i += 1
+                  elif s.startswith('--', i):
+                      while i < len(s) and s[i] != '\n': i += 1
+                  elif s[i] == '"':
+                      i += 1
+                      while i < len(s) and s[i] != '"': i += 2 if s[i] == '\\' else 1
+                      i += 1
+                  else:
+                      out.append(s[i]); i += 1
+              for n, line in enumerate(''.join(out).split('\n'), 1):
+                  if re.search(r'\bsorry\b', line):
+                      print(f'{f}:{n}: sorry'); bad = 1
+          sys.exit(bad)
+          PY
+          git grep -n -E 'maxHeartbeats|^[[:space:]]*axiom[[:space:]]' -- '*.lean' ':!Challenges/' && status=1
+          exit $status
+
+      - name: Save project build artifacts
+        if: always() && steps.cache-restore.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.sha }}

@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+message: "If you use this formalization, please cite it as below."
+title: "Elliptic Regularity: a Lean 4 formalization of the regularity theory of divergence-form equations"
+abstract: >-
+  A Lean 4 formalization, built on Mathlib, of the manuscript "Elliptic Regularity".
+  It proves the manuscript's main results on scalar, second-order, divergence-form
+  uniformly elliptic equations with measurable coefficients: the isoperimetric,
+  Sobolev, Poincare, John-Nirenberg, Trudinger, Nash and trace inequalities;
+  Almgren and Alt-Caffarelli-Friedman monotonicity; Schauder and
+  Calderon-Zygmund estimates; the Meyers estimate and Gehring lemma; the
+  De Giorgi-Nash-Moser Holder estimate and the Harnack inequality, with
+  sharpness examples; Green function estimates; and the Nash-Aronson estimates
+  for parabolic equations. Each main result is stated in a single file in the
+  form given in the manuscript.
+type: software
+authors:
+  - family-names: Armstrong
+    given-names: Scott
+    affiliation: "CNRS and Laboratoire Jacques-Louis Lions, Sorbonne Université; Courant Institute of Mathematical Sciences, New York University"
+  - family-names: Kuusi
+    given-names: Tuomo
+    affiliation: "Department of Mathematics and Statistics, University of Helsinki"
+  - family-names: Loher
+    given-names: Amélie
+    affiliation: "All Souls College, University of Oxford"
+keywords:
+  - Lean
+  - mathlib
+  - formal verification
+  - elliptic regularity
+  - partial differential equations
+license: Apache-2.0
+repository-code: "https://github.com/scottnarmstrong/EllipticRegularityLean"
+references:
+  - type: unpublished
+    title: "Elliptic Regularity"
+    authors:
+      - family-names: Armstrong
+        given-names: Scott
+      - family-names: Kuusi
+        given-names: Tuomo
+      - family-names: Loher
+        given-names: Amélie
+    year: 2026
+    notes: "The manuscript formalized by this repository; PDF in manuscript/ellipticregularity.pdf."

@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.NashAronsonLower.Challenge",
+  "solution_module": "Challenges.NashAronsonLower.Solution",
+  "theorem_names": ["PDE.nashAronsonLower"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

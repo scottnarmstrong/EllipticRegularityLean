@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.Schauder.Challenge",
+  "solution_module": "Challenges.Schauder.Solution",
+  "theorem_names": ["PDE.exists_schauderCalpha_constant"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

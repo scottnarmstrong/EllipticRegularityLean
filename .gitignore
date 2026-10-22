@@ -1,0 +1,9 @@
+# Lake build output and compiled Lean artifacts
+.lake/
+build/
+*.olean
+*.ilean
+*.olean.tmp
+*.trace
+*.hash
+*.log

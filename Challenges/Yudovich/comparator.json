@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.Yudovich.Challenge",
+  "solution_module": "Challenges.Yudovich.Solution",
+  "theorem_names": ["PDE.yudovich_uniqueness"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

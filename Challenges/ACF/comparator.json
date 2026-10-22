@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Challenges.ACF.Challenge",
+  "solution_module": "Challenges.ACF.Solution",
+  "theorem_names": ["PDE.alt_caffarelli_friedman"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}
