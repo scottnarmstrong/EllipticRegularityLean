@@ -117,3 +117,8 @@ result (`Challenge.lean`, with one `sorry`) and its proof from this library
 lean_lib «Challenges» where
   globs := #[.submodules `Challenges]
   leanOptions := projectLeanOptions
+
+/-- Sharp `L^∞` estimate for subsolutions on cubes (all `d ≥ 2`). Not a default target. -/
+lean_lib «BSlocalmax» where
+  globs := #[.submodules `BSlocalmax]
+  leanOptions := projectLeanOptions
